@@ -420,6 +420,26 @@ public class ArrayUtils {
     return res;
   }
 
+  /***
+   * This function will perform transpose of triangular matrices only.  If the original matrix is lower triangular,
+   * the return matrix will be upper triangular and vice versa.
+   * 
+   * @param ary
+   * @return
+   */
+  public static double[][] transposeTriangular(double[][] ary, boolean upperTriangular) {
+    if(ary == null) return null;
+    int rowNums = ary.length;
+    double[][] res = new double[ary.length][]; // allocate as many rows as original matrix
+    for (int rowIndex=0; rowIndex < rowNums; rowIndex++) {
+      int colNum = upperTriangular?(rowIndex+1):(rowNums-rowIndex);
+      res[rowIndex] = new double[colNum];
+      for (int colIndex=0; colIndex < colNum; colIndex++)
+        res[rowIndex][colIndex] = ary[colIndex+rowIndex][rowIndex];
+    }
+    return res;
+  }
+
   public static <T> T[] cloneOrNull(T[] ary){return ary == null?null:ary.clone();}
 
   public static <T> T[][] transpose(T[][] ary) {
