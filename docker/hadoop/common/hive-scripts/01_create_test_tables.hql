@@ -58,14 +58,20 @@ CREATE TABLE test_table_multi_key(
     fractal FLOAT,
     note STRING
 ) 
-PARTITIONED BY (year STRING, month INT)
+PARTITIONED BY (text STRING, month INT)
 STORED AS TEXTFILE;
 
-ALTER TABLE test_table_multi_key ADD PARTITION (year=2017, month=01);
-INSERT INTO TABLE test_table_multi_key PARTITION (year=2017, month=1) VALUES (1,  11.12345, "2017-01-1");
-INSERT INTO TABLE test_table_multi_key PARTITION (year=2017, month=1) VALUES (2,  11.12345, "2017-01-2");
+ALTER TABLE test_table_multi_key ADD PARTITION (text='2017-01', month=01);
+INSERT INTO TABLE test_table_multi_key PARTITION (text='2017-01', month=1) VALUES (1,  00.12345, "2017-01-01-1");
 
-ALTER TABLE test_table_multi_key ADD PARTITION (year=2017, month=02);
-INSERT INTO TABLE test_table_multi_key PARTITION (year=2017, month=2) VALUES (1,  22.12345, "2017-02-1");
-INSERT INTO TABLE test_table_multi_key PARTITION (year=2017, month=2) VALUES (2,  22.12345, "2017-02-2");
-INSERT INTO TABLE test_table_multi_key PARTITION (year=2017, month=2) VALUES (3,  22.12345, "2017-02-3");
+ALTER TABLE test_table_multi_key ADD PARTITION (text='2017\'-01', month=01);
+INSERT INTO TABLE test_table_multi_key PARTITION (text='2017\'-01', month=1) VALUES (1,  01.12345, "2017-01-1");
+
+ALTER TABLE test_table_multi_key ADD PARTITION (text=2017, month=01);
+INSERT INTO TABLE test_table_multi_key PARTITION (text=2017, month=1) VALUES (1,  11.12345, "2017-01-1");
+INSERT INTO TABLE test_table_multi_key PARTITION (text=2017, month=1) VALUES (2,  11.12345, "2017-01-2");
+
+ALTER TABLE test_table_multi_key ADD PARTITION (text=2017, month=02);
+INSERT INTO TABLE test_table_multi_key PARTITION (text=2017, month=2) VALUES (1,  22.12345, "2017-02-1");
+INSERT INTO TABLE test_table_multi_key PARTITION (text=2017, month=2) VALUES (2,  22.12345, "2017-02-2");
+INSERT INTO TABLE test_table_multi_key PARTITION (text=2017, month=2) VALUES (3,  22.12345, "2017-02-3");
