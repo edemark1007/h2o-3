@@ -215,6 +215,9 @@ public class XGBoost extends ModelBuilder<XGBoostModel,XGBoostModel.XGBoostParam
       error("_grow_policy", "must use tree_method=hist for grow_policy=lossguide");
 
     if ((_train != null) && (_parms._monotone_constraints != null)) {
+      if (_parms._tree_method == XGBoostModel.XGBoostParameters.TreeMethod.approx) {
+        error("_tree_method", "approx is not supported with _monotone_constraints, use auto/exact/hist instead");
+      }
       TreeUtils.checkMonotoneConstraints(this, _train, _parms._monotone_constraints);
     }
 
