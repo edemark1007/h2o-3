@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 # Script for installing R from source
 # To achieve an optimal build, add the necessary flags to ./configure in this script.
@@ -11,9 +11,6 @@
 # https://stackoverflow.com/questions/24019503/installing-multiple-versions-of-r
 # https://support.rstudio.com/hc/en-us/articles/215488098-Installing-multiple-versions-of-R
 # http://cran.r-project.org/doc/manuals/r-patched/R-admin.html#Installation
-
-# exit on error
-set -e
 
 R_VERSION=$1
 R_VERSION_HOME="/usr/local/R/${R_VERSION}"
